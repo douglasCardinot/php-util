@@ -33,7 +33,8 @@ class DirUtil {
 			if ( $file->isDir() ) {
 				$path = str_replace( '\\', '/', $file->getRealpath() );
 				// Don't allow duplicate
-				if ( array_search( $path, $paths ) !== false ) {
+				// And don't allow .. path
+				if ( array_search( $path, $paths ) !== false || $file->getFileName() == ".." ) {
 					continue;
 				}
 				array_push( $paths, $path );
